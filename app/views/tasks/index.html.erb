@@ -1,5 +1,11 @@
+<!-- ログイン前の表示 -->
 <h1>タスクリスト</h1>
+<p>シンプルなタスクリスト</p>
+<p>機能を利用するには会員登録が必要です</p>
+<p><%= link_to '会員登録はこちら', signup_path %></p>
 
+<!-- ログイン後の一覧表示 -->
+<h1>タスクリスト</h1>
 <ul>
     <% @tasks.each do |task| %>
         <li>[<%= task.id %>] : <%= link_to task.content, task %> ( <%= task.status %> ) </li>
