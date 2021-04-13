@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
-    before_action :require_user_logged_in, only: [:index, :show]
+  #事前のログイン確認
+    before_action :require_user_logged_in
+  #本当にログインユーザが所有しているものかを確認
     before_action :correct_user, only: [:show, :edit, :update, :destroy]
     
     def index
@@ -10,7 +12,6 @@ class TasksController < ApplicationController
     end
 
     def show
-        @task = Task.find(params[:id])
     end
 
     def new
@@ -30,11 +31,9 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
     end
 
     def update
-        @task = Task.find(params[:id])
         
         if @task.update(task_params)
             flash[:success] = 'タスクは正常に更新されました'
@@ -46,7 +45,6 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        @task = Task.find(params[:id])
         @task.destroy
         
         flash[:success] = 'タスクは正常に削除されました'
@@ -61,9 +59,12 @@ class TasksController < ApplicationController
         params.require(:task).permit(:content, :status)
     end
     
+    #本当にログインユーザが所有しているものかを確認
+    #1つのタスクを取得する流れのため、@tasksよりも@taskのほうが適切な変数名（どんな名称でも利用はできるが）
+    #パラメーターparams[:id]を取得し、@taskに入れる⇨before_actionで実行しているので、show、edit,update,destroyで再度定義する必要はない
     def correct_user
-      @tasks = current_user.tasks.find_by(id: params[:id])
-      unless @tasks
+      @task = current_user.tasks.find_by(id: params[:id])
+      unless @task
         redirect_to root_url
       end
     end

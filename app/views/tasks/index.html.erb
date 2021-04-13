@@ -1,7 +1,7 @@
 
 <% if logged_in? %>
 <!-- ログイン後の一覧表示 -->
-<p>ユーザ名: <%= current_user.name %></p>
+
 <button type="button" class="btn btn-outline-primary mb-3"><%= link_to '新規タスクの登録', new_task_path %></button>
 <table class="table">
   <thead>
