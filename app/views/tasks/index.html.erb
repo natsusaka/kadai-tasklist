@@ -6,9 +6,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">task</th>
-      <th scope="col">stats</th>
+      <th scope="col">ID</th>
+      <th scope="col">タスク内容</th>
+      <th scope="col">状態</th>
     </tr>
   </thead>
   <% @tasks.each do |task| %>
@@ -23,21 +23,11 @@
   <% end %>
 </table>
 
-<!--<ul>-->
-<!--    <% @tasks.each do |task| %>-->
-<!--        <li>[<%= task.id %>] : <%= link_to task.content, task %> ( <%= task.status %> ) </li>-->
-<!--    <% end %>-->
-<!--</ul>-->
+
 <%= paginate @tasks %>
 
 
 <% else %>
-<!-- ログイン前の表示はログイン画面に遷移させるため不要 -->
 
-<!--<div class="center jumbotron">-->
-<!--    <h1 class="display-6">シンプルなタスクリスト</h1>-->
-<!--    <p class="lead">機能を利用するには会員登録が必要です</p>-->
-<!--    <button type="button" class="btn btn-outline-primary"><%= link_to '会員登録はこちら', signup_path %></button>-->
-<!--</div>-->
 <% end %>
 
